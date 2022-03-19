@@ -24,6 +24,7 @@ func Init() {
 	}
 
 	c := cron.New(cron.WithLocation(tz))
+
 	cfg, cfgErr := config.Get()
 	if cfgErr != nil {
 		log.Fatalf("Config parsing error: \"%v\"", cfgErr)
@@ -70,7 +71,7 @@ func Init() {
 		return nil
 	})
 
-	c.AddFunc("14 11 * * *", func() {
+	c.AddFunc("00 05 * * *", func() {
 		for _, chatID := range cfg.ChatsToNotify {
 			txt := ""
 
