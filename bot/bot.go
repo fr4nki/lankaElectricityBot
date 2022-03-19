@@ -58,11 +58,14 @@ func Init() {
 	})
 
 	bot.Handle(botHandleStart, func(ctx telebot.Context) error {
+		link := fmt.Sprintf("[здесь](%s)", "https://drive.google.com/file/d/1L89wIf27TQkqwGrtjKL6lomLDdiFhYz5/view")
 		txt := fmt.Sprintf(`
-			Напиши боту %s с указанием своей группы, чтобы узнать время отключения электричества,
-		`, botHandlerSchedule)
+Напиши боту *%s* с указанием своей группы, чтобы узнать время отключения электричества.
 
-		return ctx.Send(txt)
+Свою группу можно узнать %s.
+		`, botHandlerSchedule, link)
+
+		return ctx.Send(txt, &telebot.SendOptions{ParseMode: "Markdown", DisableWebPagePreview: true})
 	})
 
 	bot.Handle(telebot.OnText, func(ctx telebot.Context) error {
