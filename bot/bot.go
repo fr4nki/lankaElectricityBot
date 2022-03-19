@@ -58,12 +58,16 @@ func Init() {
 	})
 
 	bot.Handle(botHandleStart, func(ctx telebot.Context) error {
-		link := fmt.Sprintf("[здесь](%s)", "https://drive.google.com/file/d/1L89wIf27TQkqwGrtjKL6lomLDdiFhYz5/view")
+		groupDoc := fmt.Sprintf("[здесь](%s)", "https://drive.google.com/file/d/1L89wIf27TQkqwGrtjKL6lomLDdiFhYz5/view")
+		feedback := fmt.Sprintf("[форму](%s)", "https://forms.gle/z8QdPd9yBXLF462WA")
+
 		txt := fmt.Sprintf(`
-Напиши боту *%s* с указанием своей группы, чтобы узнать время отключения электричества.
+Напиши боту *%s* с указанием своей группы, чтобы узнать время отключения электричества. Например, "%s L".
 
 Свою группу можно узнать %s.
-		`, botHandlerSchedule, link)
+
+В случае возникновения проблем, заполните %s. 
+		`, botHandlerSchedule, botHandlerSchedule, groupDoc, feedback)
 
 		return ctx.Send(txt, &telebot.SendOptions{ParseMode: "Markdown", DisableWebPagePreview: true})
 	})
@@ -74,7 +78,7 @@ func Init() {
 		return nil
 	})
 
-	c.AddFunc("00 05 * * *", func() {
+	c.AddFunc("14 15 * * *", func() {
 		for _, chatID := range cfg.ChatsToNotify {
 			txt := ""
 
