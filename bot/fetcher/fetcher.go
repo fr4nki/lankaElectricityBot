@@ -134,7 +134,9 @@ func getForecastByArea(items []ForecastItem, area string) (string, error) {
 		return text, timeError
 	}
 
-	text += fmt.Sprintf("%s. Группа %s \n\n", fromTime.Format("02.01.2006"), area)
+	text += fmt.Sprintf(
+		"%s. Группа %s \n\n",
+		fromTime.Format("02.01.2006"), strings.ToUpper(area))
 
 	for _, item := range items {
 		if strings.ToLower(item.LoadShedGroupID) == strings.ToLower(area) {

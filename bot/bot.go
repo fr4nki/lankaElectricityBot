@@ -72,12 +72,6 @@ func Init() {
 		return ctx.Send(txt, &telebot.SendOptions{ParseMode: "Markdown", DisableWebPagePreview: true})
 	})
 
-	bot.Handle(telebot.OnText, func(ctx telebot.Context) error {
-		fmt.Println(ctx.Chat().ID)
-
-		return nil
-	})
-
 	c.AddFunc("14 15 * * *", func() {
 		for _, chatID := range cfg.ChatsToNotify {
 			txt := ""
