@@ -72,7 +72,7 @@ func Init() {
 		return ctx.Send(txt, &telebot.SendOptions{ParseMode: "Markdown", DisableWebPagePreview: true})
 	})
 
-	c.AddFunc("14 15 * * *", func() {
+	c.AddFunc("00 06 * * *", func() {
 		for _, chatID := range cfg.ChatsToNotify {
 			txt := ""
 
